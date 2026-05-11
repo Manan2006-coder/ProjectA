@@ -1,0 +1,31 @@
+#include <Braccio.h>
+#include <Servo.h>
+
+Servo base;
+Servo shoulder;
+Servo elbow;
+Servo wrist_rot;
+Servo wrist_ver;
+Servo gripper;
+
+void setup() {  
+  Braccio.begin();
+}
+
+void loop() {
+  // Movement sequence for picking and placing
+  Braccio.ServoMovement(20,           0,  55, 180, 150,  90,  10);
+  delay(500);
+  Braccio.ServoMovement(20,           0,  55, 180, 150,  90,  150);
+  delay(500);
+  Braccio.ServoMovement(20,           0,  55, 90, 180,  90,  150);
+  delay(500);
+  Braccio.ServoMovement(20,           90,  55, 90, 180,  90,  150);
+  delay(500);
+  Braccio.ServoMovement(20,           90,  75, 160, 180,  90,  150);
+  delay(500);
+  Braccio.ServoMovement(20,           90,  75, 160, 180,  90,  10);
+  delay(500);
+  Braccio.ServoMovement(20,           90,  55, 110, 180,  90,  10);
+  delay(10000); 
+}
