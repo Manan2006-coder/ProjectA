@@ -1,0 +1,60 @@
+PART 3: FIRST ROBOT (THE GIVER)
+--------------------------------------------------------------------------------------------------------------------------
+#include <Braccio.h>
+#include <Servo.h>
+
+Servo base;
+Servo shoulder;
+Servo elbow;
+Servo wrist_rot;
+Servo wrist_ver;
+Servo gripper;
+
+void setup() {  
+  Braccio.begin();
+}
+
+void loop() {
+  Braccio.ServoMovement(20,           0,  45, 180, 180,  90,  10);
+  delay(1000);
+  Braccio.ServoMovement(20,           0,  45, 180, 180,  90,  90);
+  delay(1000);
+  Braccio.ServoMovement(20,           0,  45, 180, 90,  90,  90);
+  delay(1000);
+  // Handover point at Base 90
+  Braccio.ServoMovement(20,           90,  45, 180, 90,  70,  90);
+  delay(5000); // Wait for Robot 2 to grasp
+  Braccio.ServoMovement(20,           90,  45, 180, 90,  70,  10); // Release
+  delay(5000);
+}
+--------------------------------------------------------------------------------------------------------------------------
+PART 3: SECOND ROBOT (THE RECEIVER)
+--------------------------------------------------------------------------------------------------------------------------
+
+#include <Braccio.h>
+#include <Servo.h>
+
+Servo base;
+Servo shoulder;
+Servo elbow;
+Servo wrist_rot;
+Servo wrist_ver;
+Servo gripper;
+
+void setup() {  
+  Braccio.begin();
+}
+
+void loop() {
+  delay(12000); // Coordination delay to allow Robot 1 to reach handover point
+
+  Braccio.ServoMovement(20,           0,  30, 180, 90,  90,  10);
+  delay(1000);
+  Braccio.ServoMovement(20,           0,  30, 180, 90,  90,  120); // Grasp
+  delay(1000);
+  Braccio.ServoMovement(20,           60,  30, 180, 90,  90,  120);
+  delay(1000);
+  Braccio.ServoMovement(20,           60,  30, 180, 10,  90,  120);
+  delay(1000);
+  Braccio.ServoMovement(20,           60,  30, 180, 10,  90,  10); // Final release
+}
